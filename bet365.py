@@ -25,14 +25,15 @@ df.loc[df.aa_textContent.str.contains("^Aceitar$", regex=True, na=False)].iloc[
 ].se_click()
 
 
-dfteams = df.loc[(df['aa_classList'].str.contains("ovm-Fixture ovm-Fixture-horizontal ovm-Fixture-media", na=False))]
+dfteams = df.loc[(df['aa_classList'].str.contains("ovm-Competition ovm-Competition-open", na=False))]
 
 print(dfteams)
 
-
-
 lista = list(dfteams['aa_innerText'])
 lista_nova = []
+
+df.to_excel('dados.xlsx', engine='xlsxwriter')
+dfteams.to_excel('dados_teams.xlsx', engine='xlsxwriter')
 
 for x in range(len(lista)):
     z = lista[x].splitlines()
@@ -40,6 +41,5 @@ for x in range(len(lista)):
 
 dados_finais = pd.DataFrame(lista_nova, columns = ['Time 1', 'Time 2', 'Tempo de jogo','numero', 'Gols time 1', 'Gols time 2', '1', 'x', '2'])
 
-df.to_excel('dados.xlsx', engine='xlsxwriter')
-dfteams.to_excel('dados_teams.xlsx', engine='xlsxwriter')
+
 dados_finais.to_excel('dados_finais.xlsx', engine='xlsxwriter')
